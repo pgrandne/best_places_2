@@ -6,13 +6,13 @@ import PlaceList from '../components/PlaceList';
 const DUMMY_PLACES = [
     {
         id: 'p1',
-        title: 'Empire State Building',
-        description: 'One of the most famous sky scrapers in the world!',
-        imageUrl: 'https://www.urbansplatter.com/wp-content/uploads/2014/07/73.jpg',
-        address: '20W New York',
+        title: 'Place Royale',
+        description: 'Une des plus belles places de Nantes',
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Nantes_-_fontaine_de_la_Place_Royale.jpg/560px-Nantes_-_fontaine_de_la_Place_Royale.jpg',
+        address: 'Place Royale 44000 Nantes',
         location: {
-            lat: 40.7,
-            long: -73.9
+            lat: 47.2143647,
+            lng: -1.5589925
         },
         creator: 'u1'
     },
@@ -24,8 +24,8 @@ const DUMMY_PLACES = [
         imageUrl: 'https://www.urbansplatter.com/wp-content/uploads/2014/07/73.jpg',
         address: '20W New York',
         location: {
-            lat: 40.7,
-            long: -73.9
+            lat: 40.7484405,
+            lng: -73.9878584
         },
         creator: 'u2'
     }
