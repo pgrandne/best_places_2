@@ -64,7 +64,6 @@ const NewPlace = () => {
                 </Button>
         </form>
     );
-
 };
 
 export default NewPlace;
