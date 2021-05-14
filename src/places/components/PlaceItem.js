@@ -9,9 +9,24 @@ import './PlaceItem.css';
 const PlaceItem = props => {
     const [showMap, setShowMap] = useState(false);
 
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+
     const openMapHandler = () => { setShowMap(true) };
 
     const closeMapHandler = () => { setShowMap(false) };
+
+    const showDeleteWarningHandler = () => {
+        setShowConfirmModal(true);
+    };
+
+    const cancelDeleteHandler = () => {
+        setShowConfirmModal(false);
+    };
+
+    const confirmDeleteHandler = () => {
+        setShowConfirmModal(false);
+        console.log('DELETING...');
+    }
 
     return (
         <React.Fragment>
@@ -28,6 +43,19 @@ const PlaceItem = props => {
                 </div>
 
             </Modal>
+            <Modal
+            show={showConfirmModal}
+            onCancel={cancelDeleteHandler}
+            header="Veuillez confirmer" 
+            footerClass="place-item__modal-actions" 
+            footer={
+                <React.Fragment>
+                    <Button inverse onClick={cancelDeleteHandler}>ANNULER</Button>
+                    <Button danger onClick={confirmDeleteHandler}>SUPPRIMER</Button>
+                </React.Fragment>
+            }>
+                <p>Etes-vous sûr de vouloir supprimer ce lieu ?</p>
+            </Modal>
 
             <li className="place-item">
                 <Card className="place-item__Content">
@@ -41,8 +69,8 @@ const PlaceItem = props => {
                     </div>
                     <div className="place-item__actions">
                         <Button inverse onClick={openMapHandler}>VOIR SUR LA CARTE</Button>
-                        <Button to={`/places/{props.id}`}>EDITER</Button>
-                        <Button danger>SUPPRIMER</Button>
+                        <Button to={`/places/${props.id}`}>EDITER</Button>
+                        <Button danger onClick={showDeleteWarningHandler}>SUPPRIMER</Button>
                     </div>
                 </Card>
             </li>
