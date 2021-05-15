@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
 import Map from '../../shared/components/UIElements/Maps';
+import { AuthContext } from '../../shared/context/auth-context';
+
 import './PlaceItem.css';
 
 const PlaceItem = props => {
+    const auth = useContext(AuthContext);
     const [showMap, setShowMap] = useState(false);
 
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -44,16 +47,16 @@ const PlaceItem = props => {
 
             </Modal>
             <Modal
-            show={showConfirmModal}
-            onCancel={cancelDeleteHandler}
-            header="Veuillez confirmer" 
-            footerClass="place-item__modal-actions" 
-            footer={
-                <React.Fragment>
-                    <Button inverse onClick={cancelDeleteHandler}>ANNULER</Button>
-                    <Button danger onClick={confirmDeleteHandler}>SUPPRIMER</Button>
-                </React.Fragment>
-            }>
+                show={showConfirmModal}
+                onCancel={cancelDeleteHandler}
+                header="Veuillez confirmer"
+                footerClass="place-item__modal-actions"
+                footer={
+                    <React.Fragment>
+                        <Button inverse onClick={cancelDeleteHandler}>ANNULER</Button>
+                        <Button danger onClick={confirmDeleteHandler}>SUPPRIMER</Button>
+                    </React.Fragment>
+                }>
                 <p>Etes-vous sûr de vouloir supprimer ce lieu ?</p>
             </Modal>
 
@@ -69,8 +72,12 @@ const PlaceItem = props => {
                     </div>
                     <div className="place-item__actions">
                         <Button inverse onClick={openMapHandler}>VOIR SUR LA CARTE</Button>
-                        <Button to={`/places/${props.id}`}>EDITER</Button>
-                        <Button danger onClick={showDeleteWarningHandler}>SUPPRIMER</Button>
+                        {auth.isLoggedIn &&
+                            <Button to={`/places/${props.id}`}>EDITER</Button>
+                        }
+                        {auth.isLoggedIn &&
+                            <Button danger onClick={showDeleteWarningHandler}>SUPPRIMER</Button>
+                        }
                     </div>
                 </Card>
             </li>
